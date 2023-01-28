@@ -20,7 +20,7 @@ namespace hw_01_task1
             {
                 try
                 {
-                    int value = GetUserInputConsole(1, 100);
+                    byte value = GetUserInputConsole(1, 100);
                     Console.WriteLine(GetOutputStr(value));
                 }
                 catch (Exception exc)
@@ -33,7 +33,7 @@ namespace hw_01_task1
             Console.WriteLine("\nThank you for using our program! Goodbye!");
         }
 
-        static string GetOutputStr(int input)
+        static string GetOutputStr(byte input)
         {
             string outputStr = $"{input}";
 
@@ -56,13 +56,13 @@ namespace hw_01_task1
             return outputStr;
         }
 
-        static int GetUserInputConsole(int startRange, int endRange)
+        static byte GetUserInputConsole(byte startRange, byte endRange)
         {
-            int userInputConsole;
-            Console.WriteLine($"\nPlease enter {typeof(int)} value within {startRange}...{endRange} range");
-            if (!int.TryParse(Console.ReadLine(), out userInputConsole))
+            byte userInputConsole;
+            Console.WriteLine($"\nPlease enter {typeof(byte)} value within {startRange}...{endRange} range");
+            if (!byte.TryParse(Console.ReadLine(), out userInputConsole))
             {
-                throw new FormatException(message:$"Invalid format. Entered value should be {typeof(int)} type");
+                throw new FormatException(message:$"Invalid format. Entered value should be {typeof(byte)} type");
             }
             if (userInputConsole < startRange || userInputConsole > endRange)
             {
