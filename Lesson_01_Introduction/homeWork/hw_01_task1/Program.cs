@@ -14,7 +14,80 @@ namespace hw_01_task1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine("Hi! Welcome to our program!");
+
+            while (EndProgram("Would you like new calculation?"))
+            {
+                try
+                {
+                    int value = GetUserInputConsole(1, 100);
+                    Console.WriteLine(GetOutputStr(value));
+                }
+                catch (Exception exc)
+                {
+
+                    Console.WriteLine(exc.Message);
+                }
+            }
+
+            Console.WriteLine("\nThank you for using our program! Goodbye!");
         }
+
+        static string GetOutputStr(int input)
+        {
+            string outputStr = $"{input}";
+
+            if (input % 3 == 0)
+            {
+                outputStr = "Fizz";
+            }
+
+            if (input % 5 == 0)
+            {
+                if (outputStr == $"{input}")
+                {
+                    outputStr = "Bizz";
+                }
+                else
+                {
+                    outputStr += " Bizz";
+                };
+            }
+            return outputStr;
+        }
+
+        static int GetUserInputConsole(int startRange, int endRange)
+        {
+            int userInputConsole;
+            Console.WriteLine($"\nPlease enter {typeof(int)} value within {startRange}...{endRange} range");
+            if (!int.TryParse(Console.ReadLine(), out userInputConsole))
+            {
+                throw new FormatException(message:$"Invalid format. Entered value should be {typeof(int)} type");
+            }
+            if (userInputConsole < startRange || userInputConsole > endRange)
+            {
+                throw new ArgumentOutOfRangeException($"Entered via console value", 
+                    $"Value is out of {startRange}...{endRange} range");
+            }
+            return userInputConsole;
+        }
+
+
+        public static bool EndProgram(string requestText)
+        {
+            Console.WriteLine($"\n{requestText}, Yes(y), No(n)");
+            char key = Console.ReadKey().KeyChar;
+            while (key != 'n' && key != 'y')
+            {
+                Console.WriteLine("\nThe only 'y' or 'n' are required");
+                key = Console.ReadKey().KeyChar;
+            }
+            if (key == 'y')
+            {
+                return true;
+            }
+            return false;
+        }
+
     }
 }
