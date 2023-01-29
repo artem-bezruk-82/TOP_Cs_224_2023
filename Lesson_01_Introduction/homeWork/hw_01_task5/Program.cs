@@ -12,25 +12,18 @@ namespace hw_01_task5
         {
             Console.WriteLine("Please enter date, using DD.MM.YYYY format");
 
-            try
-            {
-                DateOnly date = DateOnly.Parse(Console.ReadLine() ?? string.Empty);
-                string season = date.Month switch
-                {
-                    >= 3 and < 6 => "Spring",
-                    >= 6 and < 9 => "Summer",
-                    >= 9 and < 12 => "Autumn",
-                    12 or (>= 1 and < 3) => "Winter",
-                    _ => throw new ArgumentOutOfRangeException(nameof(date), $"Date with unexpected month: {date.Month}.")
-                };
+            DateOnly date = DateOnly.Parse(Console.ReadLine() ?? string.Empty);
 
-                Console.WriteLine($"{date} {date.DayOfWeek} {season}");
-            }
-            catch (Exception ex)
+            string season = date.Month switch
             {
+                >= 3 and < 6 => "Spring",
+                >= 6 and < 9 => "Summer",
+                >= 9 and < 12 => "Autumn",
+                12 or (>= 1 and < 3) => "Winter",
+                _ => throw new ArgumentOutOfRangeException(nameof(date), $"Date with unexpected month: {date.Month}.")
+            };
 
-                Console.WriteLine(ex.Message);
-            }
+            Console.WriteLine($"{date} {date.DayOfWeek} {season}");
         }
     }
 }
